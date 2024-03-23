@@ -10,22 +10,17 @@ export const TransactionsService = {
       grant_type: "authorization_code",
     });
 
-    try {
-      const accessToken = await OauthService.getAccessToken(body);
+    const accessToken = await OauthService.getAccessToken(body);
 
-      const transactions = await TransactionsService.getTransactions(
-        accessToken,
-      );
-      const accounts = await TransactionsService.getAccounts(accessToken);
+    const transactions = await TransactionsService.getTransactions(
+      accessToken,
+    );
+    const accounts = await TransactionsService.getAccounts(accessToken);
 
-      return {
-        transactions,
-        accounts,
-      };
-    } catch (err) {
-      console.error(err);
-      return err.message;
-    }
+    return {
+      transactions,
+      accounts,
+    };
   },
   async getTransactions(accessToken: string) {
     const res = await fetch("https://api.tink.com/data/v2/transactions", {

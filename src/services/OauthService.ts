@@ -1,7 +1,5 @@
 export const OauthService = {
   async getAccessToken(body: URLSearchParams) {
-    console.log(body);
-
     const res = await fetch("https://api.tink.com/api/v1/oauth/token", {
       method: "POST",
       body,
