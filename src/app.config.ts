@@ -1,6 +1,8 @@
 import { AccountCheckService } from "./services/AccountCheckService.ts";
 import { TransactionsService } from "./services/TransactionsService.ts";
 
+export const callbackDomain = Deno.env.get("TINK_CALLBACK_DOMAIN") || "http://localhost:3000";
+
 type TinkLinkParams = {
   clientId: string;
   redirectUri: string;
@@ -37,7 +39,7 @@ export const productConfigMap: ProductConfigMap = {
     url: "https://link.tink.com/1.0/account-check/create-report",
     params: {
       clientId: "eaacf1d4a9bc4626862d6af58e93b68d",
-      redirectUri: "http://localhost:3000/account-check/callback",
+      redirectUri: `${callbackDomain}/account-check/callback`,
     },
     callbackKey: "account_verification_report_id",
     hideCallbackKey: true,
@@ -56,7 +58,7 @@ export const productConfigMap: ProductConfigMap = {
     url: "https://link.tink.com/1.0/transactions/connect-accounts",
     params: {
       clientId: "2dfe2ad7752647518c9ac55626992a2e",
-      redirectUri: "http://localhost:3000/transactions/callback",
+      redirectUri: `${callbackDomain}/transactions/callback`,
     },
     callbackKey: "code",
     hideCallbackKey: true,
