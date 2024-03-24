@@ -6,7 +6,7 @@ export function Anchor(props: JSX.HTMLAttributes<HTMLAnchorElement>) {
     <a
       {...props}
       disabled={!IS_BROWSER || props.disabled}
-      class="px-10 py-4 inline-block text-white border-2 rounded-full bg-teal hover:bg-teal-200 transition-colors"
+      class="px-9 py-4 inline-block text-white leading-none shadow rounded-full bg-teal hover:bg-teal-dark active:scale-95 active:shadow-lg transition-colors"
     />
   );
 }

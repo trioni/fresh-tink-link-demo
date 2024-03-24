@@ -1,5 +1,19 @@
 import { type PageProps } from "$fresh/server.ts";
+import { useCSP } from "$fresh/runtime.ts";
+
 export default function App({ Component }: PageProps) {
+  useCSP((csp) => {
+    if (!csp.directives.styleSrc) {
+      csp.directives.styleSrc = [];
+    }
+    if (!csp.directives.imgSrc) {
+      csp.directives.imgSrc = ["'self'"];
+    }
+    csp.directives.styleSrc.push("'self'");
+    csp.directives.imgSrc.push("https://cdn.tink.se");
+    csp.directives.defaultSrc = ["'self'"];
+  });
+
   return (
     <html>
       <head>
@@ -8,7 +22,7 @@ export default function App({ Component }: PageProps) {
         <title>fresh-tink-link-demo</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
+      <body class="bg-gray">
         <Component />
       </body>
     </html>
